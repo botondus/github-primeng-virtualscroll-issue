@@ -10,9 +10,16 @@ export class AppComponent {
   inmemoryData: Car[];
   virtualCars: Car[];
   loading: boolean;
+  totalRecords: number;
+  cols: any[];
 
   ngOnInit() {
     this.loading = true;
+    this.cols = [
+            { field: 'year', header: 'Year' },
+            { field: 'brand', header: 'Brand' },
+            { field: 'color', header: 'Color' }
+        ];
     this.inmemoryData = [
             {"brand": "VW", "year": 2012, "color": "Orange"},
             {"brand": "Audi", "year": 2011, "color": "Black"},
@@ -55,6 +62,7 @@ export class AppComponent {
             {"brand": "Ford", "year": 2000, "color": "Black"},
             {"brand": "Fiat", "year": 2013, "color": "Red"}
         ];
+    this.totalRecords = 250000;
   }
   
   onClick() {
@@ -62,7 +70,8 @@ export class AppComponent {
   }
 
   loadDataOnScroll(event: LazyLoadEvent) {      
-        this.loading = true;   
+        this.loading = true;
+        console.log(`loadDataOnScroll is called with event.first=${event.first} and event.rows=${event.rows}`);
 
         //for demo purposes keep loading the same dataset 
         //in a real production application, this data should come from server by building the query with LazyLoadEvent options 
